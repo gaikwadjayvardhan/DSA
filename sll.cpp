@@ -2,75 +2,73 @@
 using namespace std;
 
 struct Node{
-	int data;
-	string name;
-	Node* next;
+    int data;
+    string name;
+    Node* next;
+    Node(int val, string s){
+        data = val;
+        name = s;
+        next = nullptr;
+    }
 };
 
 class SLL{
-	
-	public:
-	
-	Node*  head;
-	SLL(){head = nullptr;}
-	void insertFront(int val, string a){
-		Node* newNode = new Node;
-		newNode->data = val;
-		newNode->name = a;
-		newNode->next = head;
-		head = newNode;
-	}
-	void insertBack(int val, string a){
-		Node* newNode = new Node;
-		newNode->data = val;
-		newNode->name = a;
-		newNode->next = nullptr;
-		
-		if(!head){
-			head = newNode;
-			return;
-		}
-		
-		node* temp = head:
-		while(temp->next) temp = temp->next;
-		
-		temp->next = newNode;
-	
-	}
-	
-	void display(){
-		Node* temp = head;
-			cout<<"Name:\tData:\n";
-		while(temp){
-			cout <<temp->name<<"\t" << temp->data<<endl;
-			temp = 	temp->next;
-		}
-		cout<<endl;
-	}
+    Node* head;
 
+    public:
+
+    SLL(){
+        head = nullptr;
+    }
+    void addFront(int val, string s){
+        Node* newNode = new Node(val, s);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    void Shove(int val, string s){
+        Node* newNode = new Node(val, s);
+        
+        if(!newNode) return;
+        if(!head){
+            head = newNode;
+            return;
+        }
+        Node * ptr;
+        for( ptr = head; ptr->next; ptr = ptr->next);
+
+        ptr->next = newNode;
+    }
+
+
+    friend void display(SLL s);
+    
 };
-
-int main(){
-
-	SLL a;
-	int choice, v;
-	string n;
-	cout<<"Enter the values to be added."<<endl;
-	do{
-		cout<<"1. insert\n2.Display\n3.Exit\n";
-		cin>> choice;
-		if(choice == 1){
-		cout<<"Enter the Value:"<<endl;
-		cin >>v;
-		cout<<"Enter name:"<<endl;
-		cin>>n;
-		a.insert(v, n);
-		}
-		else if(choice == 2){
-			a.display();
-		}
-	
-	}while(choice != 3);
+void show(Node n){
+    cout<<n.data<< " "<< n.name<<" "<<endl;
 
 }
+void display(SLL s){
+    for(Node* ptr = s.head; ptr; ptr = ptr->next){
+        show(*ptr);
 
+    }
+}
+
+
+
+
+int main(){
+    
+    SLL s;
+    s.addFront(10, "hello");
+    s.addFront(10, "hello");
+    s.Shove(20, "ding");
+    s.Shove(20, "ding");
+    s.Shove(20, "ding");
+    s.Shove(20, "ding");
+    s.addFront(10, "hello");
+    display(s);
+    return 0;
+
+}
